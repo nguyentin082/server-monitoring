@@ -14,7 +14,7 @@ Access services
 - Prometheus: http://localhost:9090
 - Grafana: http://localhost:3000
 - Node Exporter: port 9100
-- cAdvisor: http://localhost:8081
+- cAdvisor: http://localhost:80810
 - Doozle (example): http://localhost:8082
 
 This repository contains the `docker-compose.yml` and `prometheus.yml` for the stack.

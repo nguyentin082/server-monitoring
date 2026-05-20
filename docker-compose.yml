@@ -66,7 +66,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-      - "${CADVISOR_PORT:-8081}:8080"
+      - "${CADVISOR_PORT:-80810}:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
