@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      # Use environment variable `PROMETHEUS_URL` (e.g. "http://prometheus:9090").
+      # Grafana will expand environment variables when provisioning.
+      url: ${PROMETHEUS_URL}
+      isDefault: true
+      editable: false
