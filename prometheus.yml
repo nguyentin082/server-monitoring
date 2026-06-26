@@ -22,3 +22,7 @@ scrape_configs:
             regex: '(.*)'
             replacement: '$1:9100'
             target_label: __address__
+          # Ghi đè label instance bằng "Tên server - IP:Port"
+          - source_labels: [name, __address__]
+            separator: ' - '
+            target_label: instance
