@@ -16,6 +16,7 @@ services:
       - "--web.console.templates=/usr/share/prometheus/consoles"
       - "--storage.tsdb.retention.time=${PROMETHEUS_RETENTION_TIME:-30d}"
       - "--web.enable-lifecycle"
+      - "--web.enable-admin-api"
     networks:
       - monitoring
     restart: unless-stopped
