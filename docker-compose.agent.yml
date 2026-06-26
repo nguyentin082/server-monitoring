@@ -1,0 +1,41 @@
+services:
+  # ── Node Exporter — System metrics (CPU, RAM, Disk, Network) ──────────────
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    pid: host
+    ports:
+      - "${NODE_EXPORTER_PORT:-9100}:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+      - "--no-collector.hwmon"
+      - "--no-collector.thermal_zone"
+    networks:
+      - agent
+    restart: unless-stopped
+
+  # ── Promtail — Log shipper → pushes logs to Loki on Monitor Server ────────
+  promtail:
+    image: grafana/promtail:${PROMTAIL_VERSION:-3.5.0}
+    container_name: promtail
+    volumes:
+      - ./promtail-agent-config.yml:/etc/promtail/config.yml:ro
+      - /var/log:/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /run/log/journal:/run/log/journal:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - agent
+    restart: unless-stopped
+
+networks:
+  agent:
+    driver: bridge
