@@ -1,0 +1,35 @@
+# ── Danh sách servers cần monitor ─────────────────────────────────────────
+# File này là TEMPLATE — copy sang servers.yml và điền IP thật
+# Usage: cp targets/servers.example.yml targets/servers.yml
+#
+# File servers.yml bị ignore bởi .gitignore (chứa IP thật, không push GitHub)
+#
+# Cú pháp:
+# - labels:
+#     host: 'ten-server'       ← Hiển thị trong Grafana
+#     env: 'production'        ← Tuỳ chọn: phân loại môi trường
+#   targets:
+#     - 'IP_hoac_hostname'     ← Chỉ IP/hostname, KHÔNG cần port
+#
+# ──────────────────────────────────────────────────────────────────────────
+
+# Monitor Server (local — dùng Docker hostname, không cần đổi)
+- labels:
+    host: monitor-server
+    env: production
+  targets:
+    - node-exporter
+
+# Remote Server 1 — bỏ comment và thay IP thật
+# - labels:
+#     host: web-server-01
+#     env: production
+#   targets:
+#     - 192.168.1.10
+
+# Remote Server 2
+# - labels:
+#     host: db-server
+#     env: production
+#   targets:
+#     - 192.168.1.11

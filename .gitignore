@@ -1,1 +1,8 @@
+# ── Secrets / Credentials ─────────────────────────────────────────────────
 .env
+.env.agent
+
+# ── Infrastructure / Sensitive server info ────────────────────────────────
+# File này chứa IP thật của servers — KHÔNG push lên GitHub
+# Dùng targets/servers.example.yml làm template
+targets/servers.yml
