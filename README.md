@@ -171,4 +171,7 @@ docker compose -f docker-compose.agent.yml up -d
 
 # 5. Kiểm tra trạng thái
 docker compose -f docker-compose.agent.yml ps
+
+#6. Dừng các agent services
+docker compose -f docker-compose.agent.yml down
 ```
