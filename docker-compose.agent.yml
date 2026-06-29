@@ -49,6 +49,7 @@ services:
       - ./promtail-agent-config.yml:/etc/promtail/config.yml:ro
       - /var/log:/var/log:ro
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro  # đọc log files trực tiếp
       - /run/log/journal:/run/log/journal:ro
       - /etc/machine-id:/etc/machine-id:ro
     command: -config.file=/etc/promtail/config.yml -config.expand-env=true
