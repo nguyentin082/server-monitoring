@@ -148,3 +148,27 @@ docker compose down
 # 5. Kiểm tra trạng thái
 docker compose ps
 ```
+
+---
+
+## 🕵️ Cài đặt Agent (Remote Server)
+
+Để cài đặt agent thu thập metrics và logs trên một server khác (chỉ chạy **Node Exporter**, **cAdvisor**, và **Promtail**):
+
+```bash
+# 1. Clone thư mục dự án lên remote server
+git clone <repo-url> && cd server-monitoring
+
+# 2. Tạo file cấu hình từ template agent
+cp .env.agent.example .env
+
+# 3. Cập nhật các biến môi trường cần thiết
+# Mở file .env và điền IP/Domain của máy chủ chính vào LOKI_URL, và thiết lập SERVER_HOSTNAME
+nano .env
+
+# 4. Khởi động các agent services
+docker compose -f docker-compose.agent.yml up -d
+
+# 5. Kiểm tra trạng thái
+docker compose -f docker-compose.agent.yml ps
+```

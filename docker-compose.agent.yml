@@ -21,6 +21,23 @@ services:
       - agent
     restart: unless-stopped
 
+  # ── cAdvisor — Container metrics collector ──────────────────────────────────
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "${CADVISOR_PORT:-1081}:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/snap/docker/common/var-lib-docker:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    networks:
+      - agent
+    restart: unless-stopped
+
   # ── Promtail — Log shipper → pushes logs to Loki on Monitor Server ────────
   promtail:
     image: grafana/promtail:${PROMTAIL_VERSION:-3.5.0}
